@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,11 +34,18 @@ class GalleryFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textGallery
+        val listTranslate: ListView = binding.listTranslate
+
         galleryViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val array = arrayOf("Halo","Saya","Adalah", "Array")
+        listTranslate.adapter = activity?.let { ArrayAdapter(it, R.layout.listview_item, array) }
+
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
